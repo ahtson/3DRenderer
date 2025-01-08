@@ -1,0 +1,36 @@
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/Makefile
+
+*.o
+*.obj
+*.so
+*.a
+*.out
+
+*.swp
+*~
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+
+# cmake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+
+# bash (optional)
+.bash_history
+.bashrc
+.profile
+
+# Картинки для отладки и файлы с модельками
+*.png
+*.bmp
+*.tga
+*.obj
