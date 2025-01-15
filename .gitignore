@@ -34,3 +34,5 @@ Makefile
 *.bmp
 *.tga
 *.obj
+
+.vscode/
