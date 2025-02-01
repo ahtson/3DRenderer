@@ -1,10 +1,11 @@
 #include "Renderer.h"
 #include <iostream>
 
-void Renderer::draw_triangle(
+void Renderer::Renderer::draw_triangle(
     const Types::RenderingPrimitives::Triangle &triangle) {
   const std::vector<Types::RenderingPrimitives::Vertex> &vertices =
       triangle.get_vertices();
+
   if (vertices.size() != 3) {
     return;
   }
@@ -36,7 +37,7 @@ void Renderer::draw_triangle(
 
   float signed_area = edge_function(v0, v1, v2);
 
-  if (signed_area <= 1e-6) { // надо будет вынести в отдельную константу
+  if (signed_area <= 1e-6f) { // надо будет вынести в отдельную константу
     return;
   }
 
@@ -54,6 +55,7 @@ void Renderer::draw_triangle(
         w2 /= signed_area;
 
         float z = w0 * v0.z() + w1 * v1.z() + w2 * v2.z();
+
         Types::ScreenPixel pixel_color =
             (color0.scale(w0) + color1.scale(w1) + color2.scale(w2))
                 .as_integer();
@@ -61,4 +63,21 @@ void Renderer::draw_triangle(
       }
     }
   }
+};
+
+Types::RenderingPrimitives::Vertex
+Renderer::Renderer::apply_perspective_projection(
+    const Types::RenderingPrimitives::Vertex) const {
+  // TODO
+  Types::RenderingPrimitives::Vertex projected_vertex =
+      Types::RenderingPrimitives::Vertex();
+}
+
+// временная дебаг имлпементация
+// потом напишу нормально
+int Renderer::Renderer::render() {
+  draw_triangle({{50.0, 5.0, 1.0, RED.as_float()},
+                 {375.0, 550.0, 1.0, BLUE.as_float()},
+                 {750.0, 5.0, 1.0, GREEN.as_float()}});
+  return 0;
 }

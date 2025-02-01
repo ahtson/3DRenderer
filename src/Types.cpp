@@ -29,6 +29,7 @@ void Vertex::set_color(const Color<float> &color) { _color = color; }
 float Vertex::get_X() const { return _position(0); }
 float Vertex::get_Y() const { return _position(1); }
 float Vertex::get_Z() const { return _position(2); }
+float Vertex::get_W() const { return _position(3); }
 
 Eigen::Vector3f Vertex::get_position() const { return _position; }
 
@@ -55,7 +56,18 @@ Triangle::Triangle(const Vertex &v1, const Vertex &v2, const Vertex &v3)
   _vertices.push_back(_v1);
   _vertices.push_back(_v2);
   _vertices.push_back(_v3);
+
+  _calculate_normal_vector();
 }
 const std::vector<Vertex> &Triangle::get_vertices() const { return _vertices; }
+
+Eigen::Vector3f Triangle::get_normal_vector() const { return _normal_vector; }
+
+void Triangle::_calculate_normal_vector() {
+  Eigen::Vector3f edge1 = _v2.get_position() - _v1.get_position();
+  Eigen::Vector3f edge2 = _v3.get_position() - _v1.get_position();
+
+  _normal_vector = edge1.cross(edge2).normalized();
+}
 } // namespace RenderingPrimitives
 } // namespace Types

@@ -4,6 +4,8 @@
 #include "Camera.h"
 #include "Scene.h"
 #include "Screen.h"
+
+namespace Renderer {
 class Renderer {
 public:
   Renderer(Camera &camera, Scene &scene, Screen &screen)
@@ -11,16 +13,14 @@ public:
   int render();
   void draw_triangle(const Types::RenderingPrimitives::Triangle
                          &triangle); // потом сделать приватным после дебага
+  Types::RenderingPrimitives::Vertex
+  apply_perspective_projection(const Types::RenderingPrimitives::Vertex) const;
 
 private:
-  void apply_perspective_projection();
-  void clip();
-  void rasterize();
-  void remove_hidden_faces();
-
   Camera &_camera;
   Scene &_scene;
   Screen &_screen;
 };
+}; // namespace Renderer
 
 #endif

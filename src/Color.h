@@ -5,8 +5,11 @@
 #include <cstdint>
 #include <type_traits>
 
-template <typename T, typename = std::enable_if_t<std::is_floating_point_v<T> ||
-                                                  std::is_same_v<T, uint8_t>>>
+// потом надо будет сделать обёрткой над Eigen::Vector3f для удобства
+template <typename T,
+          typename =
+              typename std::enable_if<std::is_floating_point<T>::value ||
+                                      std::is_same<T, uint8_t>::value>::type>
 class Color {
 public:
   constexpr Color() : _red(0), _green(0), _blue(0), _alpha(255) {}
@@ -59,24 +62,28 @@ public:
     return *this;
   }
 
-  template <typename U = T,
-            typename = std::enable_if_t<std::is_floating_point_v<U>>>
+  template <typename U = T, typename = typename std::enable_if<
+                                std::is_floating_point<U>::value>::type>
   Color scale(const U scalar) const {
     return Color(_red * scalar, _green * scalar, _blue * scalar, _alpha);
   }
-  template <typename U = T,
-            typename = std::enable_if_t<std::is_floating_point_v<U>>>
+
+  template <typename U = T, typename = typename std::enable_if<
+                                std::is_floating_point<U>::value>::type>
   Color operator/(const U scalar) const {
+    assert(scalar != 0);
     return Color(_red / scalar, _green / scalar, _blue / scalar, _alpha);
   }
-  template <typename U = T,
-            typename = std::enable_if_t<std::is_floating_point_v<U>>>
+
+  template <typename U = T, typename = typename std::enable_if<
+                                std::is_floating_point<U>::value>::type>
   Color &operator*=(const U scalar) {
     set_color(_red * scalar, _green * scalar, _blue * scalar, _alpha);
     return *this;
   }
-  template <typename U = T,
-            typename = std::enable_if_t<std::is_floating_point_v<U>>>
+
+  template <typename U = T, typename = typename std::enable_if<
+                                std::is_floating_point<U>::value>::type>
   Color &operator/=(const U scalar) {
     set_color(_red / scalar, _green / scalar, _blue / scalar, _alpha);
     return *this;
@@ -89,7 +96,7 @@ public:
                         static_cast<float>(_green) / 255.0f,
                         static_cast<float>(_blue) / 255.0f,
                         static_cast<float>(_alpha) / 255.0f);
-  };
+  }
 
   template <typename U = T>
   typename std::enable_if<std::is_floating_point<U>::value,
@@ -101,7 +108,7 @@ public:
         static_cast<uint8_t>(std::min(255.0f, std::max(0.0f, _green * 255.0f))),
         static_cast<uint8_t>(
             std::min(255.0f, std::max(0.0f, _alpha * 255.0f))));
-  };
+  }
 
 private:
   T _red;

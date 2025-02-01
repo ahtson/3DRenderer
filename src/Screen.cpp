@@ -1,4 +1,5 @@
 #include "Screen.h"
+#include "iostream"
 
 Screen::Screen(unsigned int width, unsigned int height)
     : _width(width), _height(height), _zbuffer(width * height),
@@ -15,6 +16,8 @@ void Screen::set_width(unsigned int width) { _width = width; }
 void Screen::set_height(unsigned int height) { _height = height; }
 
 void Screen::clear() {
+  std::fill(_zbuffer.begin(), _zbuffer.end(),
+            std::numeric_limits<float>::infinity());
   _pixel_buffer.clear();
   _pixel_buffer.resize(_width * _height, Types::ScreenPixel());
 }
@@ -25,7 +28,7 @@ int Screen::set_pixel(unsigned int x, unsigned int y, unsigned int z,
   if (index >= _pixel_buffer.size()) {
     return 0;
   }
-  if (z < _zbuffer[index]) {
+  if (static_cast<float>(z) < _zbuffer[index]) {
     _zbuffer[index] = z;
     _pixel_buffer[index] = pixel;
   }

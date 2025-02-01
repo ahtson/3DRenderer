@@ -2,7 +2,8 @@
 #define TYPES_H
 
 #include "Color.h"
-#include "Eigen/Dense"
+#include "Eigen/Core"
+#include "Eigen/Geometry"
 #include <cstddef>
 #include <cstdint>
 #include <vector>
@@ -30,6 +31,7 @@ public:
   float get_X() const;
   float get_Y() const;
   float get_Z() const;
+  float get_W() const;
 
   Eigen::Vector3f get_position() const;
   Color<float> get_color() const;
@@ -84,6 +86,7 @@ public:
   Eigen::Vector3f get_normal_vector() const;
 
 private:
+  void _calculate_normal_vector();
   Eigen::Vector3f _normal_vector;
 
   Vertex _v1;
