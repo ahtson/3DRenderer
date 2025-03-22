@@ -19,7 +19,7 @@ public:
   int set_pixel(unsigned int x, unsigned int y, unsigned int z,
                 Types::ScreenPixel pixel); // returns non-zero value if
                                            // pixel is successfully set
-  std::vector<sf::Uint8> get_SFML_buffer() const;
+  std::vector<uint8_t> get_SFML_buffer() const;
 
 private:
   unsigned int _width;

@@ -35,8 +35,8 @@ int Screen::set_pixel(unsigned int x, unsigned int y, unsigned int z,
   return 1;
 }
 
-std::vector<sf::Uint8> Screen::get_SFML_buffer() const {
-  std::vector<sf::Uint8> SFML_buffer(_pixel_buffer.size() * 4);
+std::vector < uint8_t Screen::get_SFML_buffer() const {
+  std::vector<uint8_t> SFML_buffer(_pixel_buffer.size() * 4);
   for (unsigned int i = 0; i < _pixel_buffer.size(); ++i) {
     const ScreenPixel pixel = _pixel_buffer[i];
     SFML_buffer[i * 4 + 0] = pixel.get_red();

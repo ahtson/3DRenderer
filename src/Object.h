@@ -1,8 +1,8 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include "Eigen/Core"
 #include "Types.h"
+#include <Eigen/Core>
 
 // тут будет класс Object -- что-то типа контейнера с треугольниками (?)
 

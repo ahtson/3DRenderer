@@ -2,8 +2,7 @@
 #define TYPES_H
 
 #include "Color.h"
-#include "Eigen/Core"
-#include "Eigen/Geometry"
+#include <Eigen/Core>
 #include <cstddef>
 #include <cstdint>
 #include <vector>
