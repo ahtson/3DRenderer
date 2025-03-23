@@ -24,13 +24,16 @@ cmake_install.cmake
 CTestTestfile.cmake
 Makefile
 
-# bash (optional)
-.bash_history
-.bashrc
-.profile
-
 # Картинки для отладки и файлы с модельками
 *.png
 *.bmp
 *.tga
 *.obj
+
+.vscode/
+
+[submodule "eigen"]
+    path = eigen
+    url = https://gitlab.com/libeigen/eigen.git
+
+eigen/
