@@ -1,0 +1,39 @@
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/Makefile
+
+*.o
+*.obj
+*.so
+*.a
+*.out
+
+*.swp
+*~
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+
+# cmake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+
+# Картинки для отладки и файлы с модельками
+*.png
+*.bmp
+*.tga
+*.obj
+
+.vscode/
+
+[submodule "eigen"]
+    path = eigen
+    url = https://gitlab.com/libeigen/eigen.git
+
+eigen/
